@@ -9,4 +9,11 @@ csv = CSV.parse(csv_text, :headers => [:datetime, :user, :os, :device], :encodin
 csv.each do |row|
   # puts Time.at(row[:datetime].to_i)
   # puts row[:datetime]
+  v = Visit.new
+  v.datetime = row[:datetime]
+  v.user = row[:user]
+  v.os = row[:os]
+  v.device = row[:device]
+  v.save
+  puts "#{v.datetime} saved"
 end
