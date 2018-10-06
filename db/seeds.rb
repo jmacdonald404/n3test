@@ -5,8 +5,8 @@ require 'csv'
 # # 1472722196,201103786727,0,3"
 # csv = CSV.parse(csv_text, :headers => [:datetime, :user, :os, :device], :encoding => 'ISO-8859-1')
 if Rails.env.development? || Rails.env.test?
-  CSV.foreach('lib/seeds/smalldata.csv').each_with_index do |row, i|
-    break if i >= 20
+  CSV.foreach('lib/seeds/data.csv').each_with_index do |row, i|
+    break if i >= 100
     v = Visit.new
     v.datetime = row[0]
     v.user = row[1]

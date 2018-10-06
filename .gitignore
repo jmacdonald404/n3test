@@ -14,6 +14,11 @@
 !/tmp/.keep
 .idea
 *.DS_Store*
+.env
+
+# keep it light for github
+lib/seeds/data.csv
+db/seeds.rb
 
 # Ignore uploaded files in development
 /storage/*
