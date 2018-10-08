@@ -18,6 +18,7 @@ services:
     env_file: .env
     volumes:
       - .:/usr/src/app
+    entrypoint: /usr/src/app/docker-entrypoint.sh
     ports:
       - "3000:3000"
     depends_on:

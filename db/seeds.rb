@@ -25,20 +25,22 @@ require 'csv'
 # end
 
 
-# This adds headers to smalldata every time you seed watch out
-csv_file = 'lib/seeds/smalldata.csv'
-CSV.open(csv_file + '.tmp', 'w', write_headers: true, headers: ["user","datetime","os","device"]) do |dest|
-# Transpose original data
-  CSV.open(csv_file) do |source|
-    source.each do |row|
-      dest << row
-    end
-  end
-end
+# This adds headers to data every time you seed watch out
+# csv_file = 'lib/seeds/data.csv'
+# CSV.open(csv_file + '.tmp', 'w', write_headers: true, headers: ["user","datetime","os","device"]) do |dest|
+# # Transpose original data
+#   CSV.open(csv_file) do |source|
+#     source.each do |row|
+#       dest << row
+#     end
+#   end
+# end
+#
+# # # Swap new version for old
+# File.rename(csv_file + '.tmp', csv_file)
 
-# Swap new version for old
-File.rename(csv_file + '.tmp', csv_file)
-
-sql = "COPY visits FROM '#{Rails.root}/lib/seeds/smalldata.csv' (format csv, header, delimiter ',')"
-ActiveRecord::Base.connection.execute sql
-# COPY cases FROM 'path/to/file.csv' WITH (FORMAT csv, DELIMITER ',',  NULL ' ', HEADERS true)
+# sql = "COPY visits(user,datetime,os,device) FROM '#{Rails.root}/lib/seeds/smalldata.csv' (format csv, header, delimiter ',', null ' ')"
+# sql = "COPY visits FROM '#{Rails.root}/lib/seeds/smalldata.csv' WITH (FORMAT text, DELIMITER ',',  NULL ' ', header)"
+# ActiveRecord::Base.connection.execute sql
+# # COPY cases FROM 'path/to/file.csv' WITH (FORMAT csv, DELIMITER ',',  NULL ' ', HEADERS true)
+Visit.copy_from "lib/seeds/data.csv"
