@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-if [ "$DEPLOYED" != "true" ]
-then
-  bin/rails db:migrate 2>/dev/null || bin/rails db:setup || true
-fi
+bin/rails db:migrate 2>/dev/null || bin/rails db:setup || true
 
 exec "$@"
