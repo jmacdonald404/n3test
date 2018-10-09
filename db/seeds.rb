@@ -43,4 +43,4 @@ require 'csv'
 # sql = "COPY visits FROM '#{Rails.root}/lib/seeds/smalldata.csv' WITH (FORMAT text, DELIMITER ',',  NULL ' ', header)"
 # ActiveRecord::Base.connection.execute sql
 # # COPY cases FROM 'path/to/file.csv' WITH (FORMAT csv, DELIMITER ',',  NULL ' ', HEADERS true)
-Visit.copy_from "lib/seeds/smalldata.csv"
+Visit.copy_from "lib/seeds/data.csv"
